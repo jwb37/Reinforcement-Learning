@@ -1,0 +1,9 @@
+Nothing = 0
+Left = 1
+Right = 2
+RotateLeft = 3
+RotateRight = 4
+FastFallOn = 5
+FastFallOff = 6
+QuitGame = 7
+Pause = 8

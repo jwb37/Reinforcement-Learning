@@ -1,0 +1,44 @@
+Requirements:
+    Python 3.x
+    (Python packages):
+        pygame
+        torch
+        numpy
+        imageio
+
+All Python packages can be installed using the command 'pip install PKG':
+    e.g.  'pip install pygame'
+
+
+To train or test a model, first create a parameters file in the 'experiments' folder (I recommend copying one of the included files and adjusting parameters as required)
+We then run a python command from the base directory, passing the name of the parameters file (without the path or '.py' extension) as an argument
+
+e.g. Using the parameters file 'experiments/Tetris.py', the command to train a model is:
+         python train.py Tetris
+     The command to test the same model is:
+         python test.py Tetris
+
+By default, trained models (together with loss records, videos of high reward episodes etc.) are stored in the 'checkpoints' folder
+
+
+To play an interactive version of an environment yourself, the command is:
+        python play.py ENV_NAME
+where ENV_NAME is the name of a subdirectory within the 'environments' folder
+e.g.    python play.py Tetris
+
+
+Creating your own environments:
+
+Create a subfolder under the 'environments' folder.
+For reinforcement learning, this folder must contain a file named 'RLEnv.py' containing a class named 'RLEnv'.
+This class must implement the following methods:
+    reset():            resets the environment
+    read_state():       returns a torch tensor representing the current state
+    prepare_testing():  called before testing begins - class can use for any initial testing-specific setup work
+    prepare_training(): called before training begins - class can use for any initial training-specific setup work
+    update(action):     update the current state of the environment given the specified action. Must return a tuple of (reward, done) where done is a boolean indicating whether the episode is complete.
+The class must also contain a variable named 'actions', of type ActionSet (see 'environments/ActionSet.py') which contains a list of the possible discrete actions in the form of a list of integers. A default action may optionally also be specified.
+
+For interactive play, your folder must contain a file named 'InteractiveGame.py' containing a class named 'InteractiveGame'.
+This class only needs to implement one method:
+    start():            with this function call, control is completely handed over to your class. All display, input, game loop, game logic etc. is entirely left up to your environment to implement

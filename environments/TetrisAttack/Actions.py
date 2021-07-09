@@ -1,0 +1,9 @@
+Noop = 0
+Left = 1
+Right = 2
+Up = 3
+Down = 4
+Switch = 5
+FastScroll_On = 6
+FastScroll_Off = 7
+QuitGame = 8
