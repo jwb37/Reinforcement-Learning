@@ -10,7 +10,7 @@ def load_env(env_name):
         env,
         env_name,
         req_methods = ['read_state', 'prepare_testing', 'prepare_training', 'reset', 'update'],
-        req_attributes = ['actions']
+        req_attributes = ['actions', 'state_dims']
     )
 
     return env

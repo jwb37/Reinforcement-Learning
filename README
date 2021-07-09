@@ -36,9 +36,20 @@ This class must implement the following methods:
     read_state():       returns a torch tensor representing the current state
     prepare_testing():  called before testing begins - class can use for any initial testing-specific setup work
     prepare_training(): called before training begins - class can use for any initial training-specific setup work
-    update(action):     update the current state of the environment given the specified action. Must return a tuple of (reward, done) where done is a boolean indicating whether the episode is complete.
-The class must also contain a variable named 'actions', of type ActionSet (see 'environments/ActionSet.py') which contains a list of the possible discrete actions in the form of a list of integers. A default action may optionally also be specified.
+    update(action):     update the current state of the environment given the specified action.
+                        Must return a tuple of (reward, done) where done is a boolean indicating whether the episode is complete.
+    
+The class must also contain two variables:
+    actions:            of type ActionSet (see 'environments/ActionSet.py') which contains a list of the possible discrete actions in the form of a list of integers.
+                        A default action may optionally also be specified.
+    state_dims:         a tuple giving the output dimensions of the states produced by this environment
+                        Note that all states require an initial batch dimension of 1, but this is not included in the state_dims tuple.
+                        e.g. if your state will be an RGB image of dimensions 200x100,
+                            then state_dims = (3, 100, 200),
+                            but the output of read_state() should have dimensions (1, 3, 100, 200)
+
 
 For interactive play, your folder must contain a file named 'InteractiveGame.py' containing a class named 'InteractiveGame'.
 This class only needs to implement one method:
-    start():            with this function call, control is completely handed over to your class. All display, input, game loop, game logic etc. is entirely left up to your environment to implement
+    start():            with this function call, control is completely handed over to your class.
+                        All display, input, game loop, game logic etc. is entirely left up to your environment to implement
